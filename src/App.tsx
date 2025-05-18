@@ -1,25 +1,30 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.css";
+import AllCharactersList from "./Leftside/AllCharactersList";
+import FavouritesList from "./Rightside/FavouritesList";
+import { DetailedCharacter } from "./types";
+import CharacterDetailsModal from "./Modal/CharacterDetailsModal";
+import { FavoritesProvider } from "./FavoritesContext";
 
 function App() {
+  const [selectedDetailedCharacter, setSelectedDetailedCharacter] =
+    React.useState<DetailedCharacter | null>(null);
+  const handleCharacterClick = (character: DetailedCharacter) => {
+    setSelectedDetailedCharacter(character);
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <FavoritesProvider>
+      <div className="App">
+        <AllCharactersList onCharacterClick={handleCharacterClick} />
+        <FavouritesList />
+        {selectedDetailedCharacter && (
+          <CharacterDetailsModal
+            character={selectedDetailedCharacter}
+            onClose={() => setSelectedDetailedCharacter(null)}
+          />
+        )}
+      </div>
+    </FavoritesProvider>
   );
 }
 
