@@ -9,14 +9,25 @@ interface SearchCharacterProps {
 const SearchCharacter: React.FC<SearchCharacterProps> = (props:SearchCharacterProps) => {
   const [input, setInput] = useState(props.value);
 
+  /**
+ * Handles input change in the search field and updates the local input state.
+ * @param {React.ChangeEvent<HTMLInputElement>} e - The input change event.
+ */
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInput(e.target.value);
   };
 
+
+  /**
+   * Calls the onSearch prop with the current input value. triggers when the user presses Enter or clicks the search button.
+   */
   const handleSearch = () => {
     props.onSearch(input);
   };
 
+  /**
+ * Clears the input and calls the onClear prop.
+ */
   const handleClear = () => {
     setInput('');
     props.onClear();

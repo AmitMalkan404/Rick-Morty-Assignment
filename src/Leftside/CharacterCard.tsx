@@ -9,6 +9,11 @@ interface CharacterCardProps {
   onClick: () => void;
 }
 
+/**
+ * CharacterCard component displays a character's image, name, and favorite toggle button.
+ * @param {CharacterCardProps} props - The props for the CharacterCard component.
+ * @returns {JSX.Element} The rendered CharacterCard component.
+ */
 const CharacterCard: React.FC<CharacterCardProps> = (
   props: CharacterCardProps
 ) => {

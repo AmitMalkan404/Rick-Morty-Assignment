@@ -1,46 +1,130 @@
-# Getting Started with Create React App
+# 🧪 Rick & Morty – Tech Interview Assignment
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project is a technical assignment built using **React + TypeScript**, consuming the public [Rick and Morty API](https://rickandmortyapi.com/).
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## 🚀 How to Run the Application
 
-### `npm start`
+```bash
+git clone https://github.com/AmitMalkan404/Rick-Morty-Assignment.git
+cd Rick-Morty-Assignment
+npm install
+npm start
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+The app will be available at:  
+📍 `http://localhost:3000`
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+---
 
-### `npm test`
+## 🧩 Component Breakdown
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+| Component               | Purpose                                                                 |
+|-------------------------|-------------------------------------------------------------------------|
+| `AllCharactersList`     | Displays paginated list of characters with search capability.           |
+| `CharacterCard`         | Shows character name, image and a favorite toggle button.               |
+| `DetailedCharacter`     | Modal that displays detailed character info.                            |
+| `SearchCharacter`       | Search input field with a clear button.                                 |
+| `FavoritesList`         | Displays the user's favorite characters with a randomizable background. |
+| `FavoriteCharacterCard` | Displays a character inside the favorites list.                         |
+| `App`                   | Manages selected character and renders global layout.                   |
 
-### `npm run build`
+---
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 🧰 Services
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### 📡 API Service
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- Uses `fetch` to interact with:  
+  `https://rickandmortyapi.com/api/character`
+- Supports:
+  - pagination
+  - name-based search
+  - error handling for invalid queries or empty results
 
-### `npm run eject`
+### 🧠 State Management
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- Global state is handled using **React Context API** (`FavoritesContext`).
+- Local component states manage:
+  - current page
+  - loading
+  - selected character (for modal)
+  - search term
+  - total pages
+  - background image in favorites
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+---
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## 🔄 Interaction Flow Diagram
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+### 🧱 Component Render Flow
+- `App` renders `AllCharactersList`.
+- When a character is clicked, the modal (`DetailedCharacter`) is rendered with full info.
 
-## Learn More
+### 🔍 Search
+- `SearchCharacter` receives input and triggers `onSearch`.
+- `AllCharactersList` fetches filtered characters by name.
+- Clearing search resets pagination and character list.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### 🪟 Modal Interaction
+- `onCharacterClick` triggers `setSelectedCharacter`.
+- `DetailedCharacter` renders with full metadata:
+  - status
+  - species
+  - gender
+  - episode count
+  - origin (name, type, dimension)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### ⭐ Favorites Management
+- `toggleFavorite(character)` adds/removes from `FavoritesContext` (Map by `id`).
+- `FavoritesList` reads the context and displays all favorite characters.
+- Includes “Change Background” button — selects a random background image from 12 local assets (`public/assets/{1–12}.jpg`).
+
+---
+
+## 🗂 Folder Structure (Simplified)
+
+```
+src/
+│
+├── context/
+│   └── FavoritesContext.tsx
+│
+├── Leftside/
+│   ├── AllCharactersList.tsx
+│   ├── allCharactersList.css
+│   ├── CharacterCard.tsx
+│   ├── characterCard.css
+│   └── SearchCharacter.tsx
+│
+├── Modal/
+│   ├── CharacterDetailsModal.tsx
+│   └── characterDetailsModal.css
+│
+├── Rightside/
+│   ├── FavoritesList.tsx
+│   ├── favoritesList.css
+│   ├── FavoriteCharacterCard.tsx
+│   └── favoriteCharacterCard.css
+│
+├── types/
+│   └── types.ts
+│
+├── App.tsx
+├── App.css
+├── App.test.tsx
+├── index.tsx
+└── index.css
+
+```
+
+---
+
+## 📄 License
+
+This project is intended for educational and technical evaluation purposes only.  
+All code was written by the author during personal hours, with no use of proprietary or company code.  
+No external collaborators, employees, or corporate resources were involved.
+
+---

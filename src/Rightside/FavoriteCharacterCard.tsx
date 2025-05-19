@@ -1,7 +1,7 @@
 import React from "react";
-import { DetailedCharacter } from "../types";
+import { DetailedCharacter } from "../types/types";
 import "./favoriteCharacterCard.css";
-import { useFavorites } from "./../FavoritesContext";
+import { useFavorites } from "../context/FavoritesContext";
 
 
 interface FavoriteCharacterCardProps {

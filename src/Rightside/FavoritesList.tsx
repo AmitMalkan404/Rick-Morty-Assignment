@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useFavorites } from "./../FavoritesContext";
+import { useFavorites } from "../context/FavoritesContext";
 import FavoriteCharacterCard from "./FavoriteCharacterCard";
 import "./favoritesList.css";
 
@@ -11,6 +11,9 @@ const FavouritesList: React.FC = () => {
 
   const favoriteCharacters = Object.values(favorites);
 
+  /**
+   * Changes the background image to a random image from the assets folder.
+   */
   const handleBackgroundChange = () => {
     const randomIndex = Math.floor(Math.random() * 12) + 1;
     setBackgroundImage(`assets/${randomIndex}.jpg`);

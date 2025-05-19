@@ -1,14 +1,19 @@
 import React from "react";
 import "./App.css";
 import AllCharactersList from "./Leftside/AllCharactersList";
-import FavouritesList from "./Rightside/FavouritesList";
-import { DetailedCharacter } from "./types";
+import FavoritesList from "./Rightside/FavoritesList";
+import { DetailedCharacter } from "./types/types";
 import CharacterDetailsModal from "./Modal/CharacterDetailsModal";
-import { FavoritesProvider } from "./FavoritesContext";
+import { FavoritesProvider } from "./context/FavoritesContext";
 
 function App() {
   const [selectedDetailedCharacter, setSelectedDetailedCharacter] =
     React.useState<DetailedCharacter | null>(null);
+
+  /**
+   * Handles when a character is clicked in the character list.
+   * @param {DetailedCharacter} character - The character to show in the modal.
+   */
   const handleCharacterClick = (character: DetailedCharacter) => {
     setSelectedDetailedCharacter(character);
   };
@@ -16,7 +21,7 @@ function App() {
     <FavoritesProvider>
       <div className="App">
         <AllCharactersList onCharacterClick={handleCharacterClick} />
-        <FavouritesList />
+        <FavoritesList />
         {selectedDetailedCharacter && (
           <CharacterDetailsModal
             character={selectedDetailedCharacter}

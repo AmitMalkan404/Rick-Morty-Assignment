@@ -1,9 +1,9 @@
 import React, { use, useState, useEffect } from "react";
 import CharacterCard from "./CharacterCard";
 import "./allCharactersList.css";
-import { Character, DetailedCharacter } from "../types";
+import { Character, DetailedCharacter } from "../types/types";
 import SearchCharacter from "./SearchCharacter";
-import { useFavorites } from "./../FavoritesContext";
+import { useFavorites } from "../context/FavoritesContext";
 
 export interface AllCharactersListProps {
   onCharacterClick: (character: DetailedCharacter) => void;
@@ -20,6 +20,10 @@ const AllCharactersList: React.FC<AllCharactersListProps> = (
   const [searchTerm, setSearchTerm] = useState<string>("");
   const { toggleFavorite, isFavorite } = useFavorites();
 
+  /**
+   * Returns an array of page numbers for pagination, centered around the current page.
+   * @returns {number[]} Array of page numbers to display.
+   */
   const getPageRange = () => {
     const delta = 2;
     const start = Math.max(1, page - delta);
@@ -33,6 +37,10 @@ const AllCharactersList: React.FC<AllCharactersListProps> = (
     return pages;
   };
 
+  /**
+   * Handles the click event on a character card and triggers the parent callback with detailed character info.
+   * @param {number} characterId - The ID of the character to handle.
+   */
   const handleCardClick = (characterId: number) => {
     const character = currentCharacters.find((char) => char.id === characterId);
     if (character) {
@@ -40,7 +48,11 @@ const AllCharactersList: React.FC<AllCharactersListProps> = (
     }
   };
 
-  // Create a DetailedCharacter instance from a Character
+  /**
+   * Creates a DetailedCharacter object from a Character object.
+   * @param {any} character - The character object to convert.
+   * @returns {DetailedCharacter} The detailed character object.
+   */
   const createDetailedCharacter = (character: any): DetailedCharacter => {
     return {
       id: character.id,
@@ -54,18 +66,29 @@ const AllCharactersList: React.FC<AllCharactersListProps> = (
     };
   };
 
+  /**
+   * Handles the search action, enabling search mode and updating the search term.
+   * @param {string} searchTerm - The search term entered by the user.
+   */
   const handleSearch = (searchTerm: string) => {
     setIsOnSearchMode(true);
     setSearchTerm(searchTerm);
     setPage(1);
   };
 
+  /**
+   * Handles clearing the search, disabling search mode and resetting the search term.
+   */
   const handleSearchClear = () => {
     setIsOnSearchMode(false);
     setSearchTerm("");
     setPage(1);
   };
 
+  /**
+   * Fetches characters filtered by the search term from the API.
+   * @param {string} searchTerm - The search term to filter characters by.
+   */
   const fetchFilteredCharacters = async (searchTerm: string) => {
     try {
       const response = await fetch(
@@ -81,6 +104,9 @@ const AllCharactersList: React.FC<AllCharactersListProps> = (
     }
   };
 
+  /**
+   * Fetches all characters for the current page from the API.
+   */
   const fetchAllCharacters = async () => {
     try {
       const response = await fetch(

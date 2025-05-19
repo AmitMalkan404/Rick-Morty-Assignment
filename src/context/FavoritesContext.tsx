@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState } from "react";
-import { DetailedCharacter } from "./types";
+import { DetailedCharacter } from "../types/types";
 
 type FavoritesMap = { [id: number]: DetailedCharacter };
 
@@ -14,6 +14,10 @@ const FavoritesContext = createContext<FavoritesContextType | undefined>(undefin
 export const FavoritesProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [favorites, setFavorites] = useState<FavoritesMap>({});
 
+  /**
+   * Toggles a character as favorite or removes it from favorites.
+   * @param {DetailedCharacter} character - The character to toggle as favorite.
+   */
   const toggleFavorite = (character: DetailedCharacter) => {
     setFavorites((prev) => {
       const newFavorites = { ...prev };
@@ -26,6 +30,11 @@ export const FavoritesProvider: React.FC<{ children: React.ReactNode }> = ({ chi
     });
   };
 
+  /**
+   * Checks if a character is marked as favorite.
+   * @param {number} id - The ID of the character.
+   * @returns {boolean} True if the character is a favorite, false otherwise.
+   */
   const isFavorite = (id: number) => {
     return !!favorites[id];
   };
@@ -37,6 +46,11 @@ export const FavoritesProvider: React.FC<{ children: React.ReactNode }> = ({ chi
   );
 };
 
+/**
+ * Custom hook to access the FavoritesContext.
+ * @returns {FavoritesContextType} The favorites context value.
+ * @throws Will throw an error if used outside of FavoritesProvider.
+ */
 export const useFavorites = (): FavoritesContextType => {
   const context = useContext(FavoritesContext);
   if (!context) {
