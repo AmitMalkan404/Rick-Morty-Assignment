@@ -1,4 +1,4 @@
-# 🧪 Rick & Morty – Tech Interview Assignment
+# 🧪 Rick & Morty – Tech Assignment
 
 This project is a technical assignment built using **React + TypeScript**, consuming the public [Rick and Morty API](https://rickandmortyapi.com/).
 
