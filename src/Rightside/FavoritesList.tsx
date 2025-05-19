@@ -3,7 +3,7 @@ import { useFavorites } from "../context/FavoritesContext";
 import FavoriteCharacterCard from "./FavoriteCharacterCard";
 import "./favoritesList.css";
 
-const FavouritesList: React.FC = () => {
+const FavoritesList: React.FC = () => {
   const [backgroundImage, setBackgroundImage] =
     useState<string>("assets/1.jpg");
 
@@ -42,4 +42,4 @@ const FavouritesList: React.FC = () => {
   );
 };
 
-export default FavouritesList;
+export default FavoritesList;

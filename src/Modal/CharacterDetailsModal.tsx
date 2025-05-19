@@ -1,4 +1,3 @@
-// CharacterDetailsModal displays detailed information about a character in a modal dialog.
 import React from "react";
 import "./characterDetailsModal.css";
 import { DetailedCharacter } from "../types/types";
